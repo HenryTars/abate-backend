@@ -4,8 +4,6 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Hash;
-
 class CreateAdminUser extends Command
 {
     protected $signature = 'admin:create
@@ -29,7 +27,7 @@ class CreateAdminUser extends Command
         $user = User::create([
             'name'     => $name,
             'email'    => $email,
-            'password' => Hash::make($password),
+            'password' => $password,
             'role'     => 'admin',
         ]);
 
