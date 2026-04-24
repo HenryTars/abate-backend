@@ -1,16 +1,18 @@
 services:
   - type: web
     name: abate-api
-    runtime: php
-    buildCommand: bash build.sh
-    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
+    runtime: docker
     envVars:
+      - key: APP_NAME
+        value: Abate
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: false
       - key: APP_KEY
         generateValue: true
+      - key: APP_URL
+        sync: false
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
