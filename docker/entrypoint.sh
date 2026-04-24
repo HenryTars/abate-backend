@@ -24,5 +24,13 @@ if [ $MIGRATE_EXIT -ne 0 ]; then
     echo "[ERROR] DB_USERNAME=$DB_USERNAME"
 fi
 
+if [ -n "$ADMIN_EMAIL" ] && [ -n "$ADMIN_PASSWORD" ]; then
+    echo "==> Creating admin user ($ADMIN_EMAIL)"
+    php artisan admin:create \
+        --name="${ADMIN_NAME:-Admin}" \
+        --email="$ADMIN_EMAIL" \
+        --password="$ADMIN_PASSWORD" || echo "[WARN] Admin creation skipped (user may already exist)"
+fi
+
 echo "==> Starting Apache"
 exec apache2-foreground
