@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(composer require *)",
+      "Bash(php artisan *)",
+      "Read(//c/Users/H.Kemibara/PhpstormProjects/**)",
+      "Bash(flutter create *)"
+    ]
+  }
+}
