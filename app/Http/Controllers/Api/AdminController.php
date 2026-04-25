@@ -152,7 +152,7 @@ class AdminController extends ApiController
     public function analytics(): JsonResponse
     {
         $reportsByDay = Report::select(
-                DB::raw("strftime('%Y-%m-%d', created_at) as date"),
+                DB::raw("TO_CHAR(created_at AT TIME ZONE 'UTC', 'YYYY-MM-DD') as date"),
                 DB::raw('count(*) as total'),
                 DB::raw("sum(case when status = 'pending' then 1 else 0 end) as pending"),
                 DB::raw("sum(case when status = 'in_progress' then 1 else 0 end) as in_progress"),
