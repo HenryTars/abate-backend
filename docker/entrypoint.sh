@@ -6,6 +6,13 @@ echo "==> Configuring Apache on port $PORT"
 sed -i "s/Listen 80/Listen $PORT/" /etc/apache2/ports.conf
 sed -i "s/\*:10000/*:$PORT/" /etc/apache2/sites-available/000-default.conf
 
+echo "==> Fixing storage permissions"
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+echo "==> Linking storage"
+php artisan storage:link --force || echo "[WARN] storage:link failed"
+
 echo "==> Caching config"
 php artisan config:cache || echo "[WARN] config:cache failed"
 
